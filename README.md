@@ -251,6 +251,9 @@ When contributing to the standards:
 
 ## 📄 License
 
+Copyright (c) 2025 LIDR.co
+Licensed under the MIT License
+
 **English:**
 
 The content of this repository is part of the AI4Devs program by LIDR.co. If you want to learn to code with AI like the pros and get more templates and resources like these, you can find all the information on the official website: https://lidr.co/ia-devs
