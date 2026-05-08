@@ -34,10 +34,10 @@ It's highly recommended to be used along with Spec-Driven Development frameworks
 
 This repository uses **symbolic links** or **naming conventions** to support multiple AI coding copilots without duplication:
 
-- `**AGENTS.md`** → Generic agent rules (works with most copilots)
-- `**CLAUDE.md**` → Optimized for Claude/Cursor
-- `**codex.md**` → Optimized for GitHub Copilot/Codex
-- `**GEMINI.md**` → Optimized for Google Gemini
+- **`AGENTS.md`** → Generic agent rules (works with most copilots)
+- **`CLAUDE.md`** → Optimized for Claude/Cursor
+- **`codex.md`** → Optimized for GitHub Copilot/Codex
+- **`GEMINI.md`** → Optimized for Google Gemini
 
 All these files reference the same core rules in `docs/base-standards.md`, ensuring consistency across different AI tools while allowing copilot-specific customizations.
 
@@ -51,37 +51,33 @@ All these files reference the same core rules in `docs/base-standards.md`, ensur
 
 ## 🚀 Quick Start
 
-### Quick Start (1 Minute Setup)
+### Recommended: Automated Setup (Quick Start)
 
-Want to get started right away? Open your coding agent in your project and say:
+This is the fastest and most reliable way to install Specboot into an existing project.
+It is an automated alternative to the manual setup steps below (manual steps 1–4).
+
+Open your coding agent in your project root and say:
 
 ```text
 Please read and follow the instructions in this file to set up LIDR's spec-driven development workflow in my project: https://raw.githubusercontent.com/LIDR-academy/ai-specs/main/setup-sdd.md
 ```
 
-Your coding agent will automatically install OpenSpec (if needed), initialize it, import this repository's standards/skills, and update your OpenSpec config context. Skip to Post-Installation when done.
+The agent will:
+
+- Install and initialize OpenSpec (if needed)
+- Import this repository’s `docs/` and `ai-specs/`
+- Update your OpenSpec config context (`config.yml` or `openspec/config.yaml`)
+- Store these onboarding instructions as `ai-specs/specboot-instructions.md` (so your project README can remain yours)
 
 Works with Claude Code, Cursor, Codex, Gemini, or any agent that can read and execute repository setup instructions.
 
-### Post-Installation
+Important: even after automated setup, you still need to **review and customize** `docs/` so it matches your real stack, domain, and architecture (when applicable).
 
-After automated setup completes:
+### Alternative: Manual Setup (Steps 1–4)
 
-1. Customize `docs/` for your real stack, domain, and architecture
-2. (Optional but recommended) Ask your coding agent to create a dedicated worktree before starting the OpenSpec flow, to isolate development. It can use the `using-git-worktrees` skill.
-3. Run the extended OpenSpec flow: `/enrich-us` → `/new` → `/ff` → `/apply` → `/verify` → `/archive` → `/commit`
-4. Ask coding agent to clean the worktree when finished
+Use this if you don’t want the automation in `setup-sdd.md`.
 
-### Install Claude Plugin (Optional)
-
-If you use Claude in your IDE, install the Claude plugin/extension first so the agent can run this workflow directly in your editor:
-
-1. Open your IDE extensions marketplace
-2. Search for `Claude` by Anthropic
-3. Install it and complete sign-in
-4. Open your project and run the setup prompt from this README
-
-### 1. (Recommended) Install and Initialize OpenSpec
+### 1) Install and Initialize OpenSpec
 
 OpenSpec works great with this repository and is recommended for a spec-driven workflow.
 
@@ -102,7 +98,7 @@ cd your-project
 openspec init
 ```
 
-### 2. Import Into Your Project
+### 2) Import Into Your Project
 
 Copy this repository into your project first, so the `docs/` and `ai-specs/` paths already exist when you configure OpenSpec:
 
@@ -111,7 +107,21 @@ Copy this repository into your project first, so the `docs/` and `ai-specs/` pat
 cp -rn LIDR-ai-specs/* your-project/
 ```
 
-### 3. Customize `docs/` for Your Project (Mandatory)
+Alternative for step 2 (Claude Code users):
+
+- You can alternatively install the Claude plugin and use it as the coding agent for this import step.
+- This only changes **how** you install Specboot. It does **not** install OpenSpec, does **not** update OpenSpec config, and does **not** customize `docs/`.
+
+Quick install:
+
+```bash
+npx @lidr/lidr-specboot
+```
+
+This copies all files into your project and recreates the symlink structure automatically. Safe to re-run: existing files are never overwritten.
+
+
+### 3) Customize `docs/` for Your Project (Mandatory)
 
 This step is required. If you skip it, your AI assistant will use generic technical context instead of your real project context.
 
@@ -119,7 +129,7 @@ Update the files in `docs/` to match your stack, architecture patterns, domain l
 
 For detailed guidance and ready-to-use prompt examples, see [Customization](#-customization).
 
-### 4. Point `config.yml` to Your `docs` Folder
+### 4) Point OpenSpec Config to Your `docs/` and `ai-specs/`
 
 After `openspec init` and after copying this repository, update your project's `config.yml` to include your technical context from `docs`.
 
@@ -167,9 +177,11 @@ rules:
     - Use docs/api-spec.yml and docs/data-model.md for API and data consistency in specs and tasks
 ```
 
-### 5. Verify Configuration
+## ✅ Verify Configuration (Required)
 
-Your AI copilot will automatically load:
+Do this regardless of which setup path you chose (Quick Start or Manual Setup).
+
+Your AI copilot should automatically load:
 
 - **Claude/Cursor**: `CLAUDE.md` → `docs/base-standards.md`
 - **GitHub Copilot**: `codex.md` → `docs/base-standards.md`
@@ -181,22 +193,37 @@ All paths and rules are configured to work seamlessly without manual adjustments
 
 The recommended workflow in this repository uses official OpenSpec commands:
 
-1. `**/enrich-us`** (optional): refine a vague user story or idea
-2. `**/ff**`: create all required OpenSpec artifacts
-3. `**/apply**`: implement tasks one by one
-4. `**/verify**`: validate implementation against the change artifacts
-5. `**/archive**`: archive the completed change
-6. `**/commit**`: create focused commit(s) after verification
+The recommended workflow in this repository uses official OpenSpec commands:
 
+1. **`/enrich-us`** (optional): refine a vague user story or idea
+2. **`/ff`**: create all required OpenSpec artifacts
+3. **`/apply`**: implement tasks one by one
+4. **`/verify`**: validate implementation against the change artifacts
+5. **`/archive`**: archive the completed change
+6. **`/commit`**: create focused commit(s) after verification
 Workflow reference image:
 
-OpenSpec custom workflow reference
+![OpenSpec custom workflow reference](https://drive.google.com/uc?export=view&id=1H5pAfjzpvYLlaGxJOrd6zox2Q87HxGkh)
+
+### Optional: MCP Integrations (Jira + Playwright)
+
+This workflow is enhanced with MCP servers that are mentioned in the workflow. These are optional and you can skip them entirely, or replace them with equivalent tools.
+
+- **Jira MCP (recommended in `/enrich-us`)**: lets the agent read Jira tickets directly to enrich user stories without copy/paste.
+- **Playwright MCP (recommended for E2E testing)**: lets the agent run browser-based E2E checks for user workflows.
+
+Recommended installation approach:
+
+- **Cursor**: enable/configure MCP servers in Cursor settings (add your Jira and Playwright MCP servers, then provide credentials such as Jira API tokens as required).
+- **Other agents/IDEs**: follow your tool’s MCP installation docs and configure Jira/Playwright there.
+
+If you don’t use Jira, or you don’t want automated E2E testing in this workflow, just update the skills and keep using the same OpenSpec command flow.
 
 ### Example: End-to-End Flow
 
 Use these commands in sequence:
 
-Optional first step (recommended): create a dedicated worktree before running the command flow, then clean it up when done.
+Optional first step (recommended): create a dedicated worktree before running the command flow, then clean it up when done. The `using-git-worktrees` skill can automate this.
 
 ```bash
 /enrich-us SCRUM-10
@@ -207,7 +234,7 @@ Optional first step (recommended): create a dedicated worktree before running th
 /commit
 ```
 
-Artifacts are managed through OpenSpec change directories during this flow.
+Artifacts are managed through OpenSpec directories during this flow, including testing reports created. 
 
 ### Useful Skills
 
@@ -360,11 +387,8 @@ El contenido de este repositorio es parte del programa AI4Devs de LIDR.co. Si qu
 
 Some workflows and skill patterns in this repository are inspired by the Superpowers framework, especially around:
 
-- `brainstorming`
 - `using-git-worktrees`
-- `writing-plans`
-- `subagent-driven-development`
-- `test-driven-development`
+- `writing-skills`
 
 Superpowers project: [obra/superpowers](https://github.com/obra/superpowers/tree/main)
 
