@@ -75,7 +75,7 @@ If the user **explicitly** requested no git operations (e.g. "no PR", "only comm
 
 ## 5. Pull Request
 
-- Use the **GitHub CLI (`gh`)** for all GitHub operations (per `develop-backend.md`).
+- Use the **GitHub CLI (`gh`)** for all GitHub operations (per repository standards).
 - Create or update the PR for the current branch:
   - **Title**: Clear, aligned with the commit (e.g. include ticket ID if applicable: `[SCRUM-123] Add candidate filters to position list`).
   - **Description**: Summarize the change set, link to the ticket if relevant, and note any testing or follow-ups.
@@ -91,7 +91,7 @@ If the user **explicitly** requested no git operations (e.g. "no PR", "only comm
 
 - `docs/base-standards.md`: English-only for commit messages and technical artifacts.
 - `docs/backend-standards.md` and `docs/frontend-standards.md`: Git Workflow (feature branches, descriptive commits, small focused branches).
-- `ai-specs/skills/develop-backend/SKILL.md`: Use `gh` for GitHub and PR creation; optional ticket-based branch and PR linking.
+- Repository git workflow conventions: Use `gh` for GitHub and PR creation; optional ticket-based branch and PR linking.
 
 # Notes
 
